@@ -1,7 +1,6 @@
 <!--///////////Page sidebar begin///////////////-->
 <aside class="page-sidebar">
     <div class="h-100 flex-column d-flex" data-simplebar>
-
         <!--Aside-logo-->
         <div class="aside-logo p-3 position-relative">
             <a href="index.html" class="d-block pe-2">
@@ -36,7 +35,8 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('admin.dashboard') }}" data-bs-toggle=""
-                            class="nav-link d-flex align-items-center text-truncate active" aria-expanded="false">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.dashboard' ? 'active' : '' }} "
+                            aria-expanded="false">
                             <!--Sidebar nav text-->
                             <span class="sidebar-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
@@ -52,7 +52,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.gallary') }}" data-bs-toggle="" aria-expanded="false"
-                            class="nav-link d-flex align-items-center text-truncate ">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.gallary' ? 'active' : '' }} ">
                             <span class="sidebar-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16"
                                     height="16">
@@ -72,7 +72,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.privacy_policy') }}" data-bs-toggle="" aria-expanded="false"
-                            class="nav-link d-flex align-items-center text-truncate ">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.privacy_policy' ? 'active' : '' }}">
                             <span class="sidebar-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                     <path
@@ -81,13 +81,13 @@
 
                             </span>
                             <!--Sidebar nav text-->
-                            <span class="sidebar-text">Privacy Polcy</span>
+                            <span class="sidebar-text">Privacy Policy</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('admin.terms') }}" data-bs-toggle="" aria-expanded="false"
-                            class="nav-link d-flex align-items-center text-truncate ">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.terms' ? 'active' : '' }}">
                             <span class="sidebar-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                     <path
@@ -102,7 +102,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.contact.address') }}" data-bs-toggle="" aria-expanded="false"
-                            class="nav-link d-flex align-items-center text-truncate ">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.contact.address' ? 'active' : '' }}">
                             <span class="sidebar-icon">
                                 <i class="far fa-address-book"></i>
 
@@ -114,7 +114,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.team') }}" data-bs-toggle="" aria-expanded="false"
-                            class="nav-link d-flex align-items-center text-truncate ">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.team' ? 'active' : '' }}">
                             <span class="sidebar-icon">
                                 <i class="fa fa-solid fa-user-plus"></i>
                             </span>
@@ -125,7 +125,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.about.video') }}" data-bs-toggle="" aria-expanded="false"
-                            class="nav-link d-flex align-items-center text-truncate ">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.about.video' ? 'active' : '' }}">
                             <span class="sidebar-icon">
                                 <i class="fa fa-solid fa-video"></i>
                             </span>
@@ -135,13 +135,36 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{ route('admin.career.video') }}" data-bs-toggle="" aria-expanded="false"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.career.video' ? 'active' : '' }}">
+                            <span class="sidebar-icon">
+                                <i class="fa fa-solid fa-video"></i>
+                            </span>
+                            <!--Sidebar nav text-->
+                            <span class="sidebar-text">Careers Video</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="{{ route('admin.user.counts') }}" data-bs-toggle="" aria-expanded="false"
-                            class="nav-link d-flex align-items-center text-truncate ">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.user.counts' ? 'active' : '' }}">
                             <span class="sidebar-icon">
                                 <i class="fa fa-solid fa-calculator"></i>
                             </span>
                             <!--Sidebar nav text-->
                             <span class="sidebar-text">User Counts</span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.user.testimonial') }}" data-bs-toggle="" aria-expanded="false"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.user.testimonial' ? 'active' : '' }}">
+                            <span class="sidebar-icon">
+                                <i class="fa fa-duotone fa-comments"></i>
+                            </span>
+                            <!--Sidebar nav text-->
+                            <span class="sidebar-text">User Testimonial</span>
                         </a>
                     </li>
 

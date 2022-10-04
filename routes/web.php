@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/', '\App\Http\Controllers\Auth\LoginController@redirectRoute');
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', '\App\Http\Controllers\Auth\LoginController@showLoginForm')->name('admin.showlogin');
     Route::post('/login', '\App\Http\Controllers\Auth\LoginController@doLogin')->name('admin.login');
@@ -55,12 +55,23 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('delete-video/{id}', '\App\Http\Controllers\Admin\LegalController@deleteAboutVideo')->name('delete.about.video');
     Route::get('status-video/{id}', '\App\Http\Controllers\Admin\LegalController@statusAboutVideo')->name('status.about.video');
 
+    // career video route
+    Route::get('/career-video', '\App\Http\Controllers\Admin\HomeController@careerVideo')->name('admin.career.video');
+    Route::post('/add/career-video', '\App\Http\Controllers\Admin\HomeController@addCareerVideo')->name('admin.add.career.video');
+    Route::post('/edit/career-video', '\App\Http\Controllers\Admin\HomeController@editCareerVideo')->name('admin.edit.career.video');
+    Route::get('delete-career-video/{id}', '\App\Http\Controllers\Admin\HomeController@deleteCareerVideo')->name('delete.career.video');
+    Route::get('status-career-video/{id}', '\App\Http\Controllers\Admin\HomeController@statusCareerVideo')->name('status.career.video');
+
     // user counts route
     Route::get('/userCounts', '\App\Http\Controllers\Admin\LegalController@userCount')->name('admin.user.counts');
     Route::post('/add/userCounts', '\App\Http\Controllers\Admin\LegalController@addUserCounts')->name('admin.add.user.counts');
     Route::post('/edit/userCounts', '\App\Http\Controllers\Admin\LegalController@editUserCounts')->name('admin.edit.user.counts');
-    Route::get('delete-userCounts/{id}', '\App\Http\Controllers\Admin\LegalController@deleteUserCounts')->name('delete.user.counts');
-    Route::get('status-userCounts/{id}', '\App\Http\Controllers\Admin\LegalController@statusUserCounts')->name('status.user.counts');
+
+    // Testinomial counts route
+    Route::get('/testimonial', 'App\Http\Controllers\Admin\HomeController@userTestimonial')->name('admin.user.testimonial');
+    Route::post('/add/testimonial', 'App\Http\Controllers\Admin\HomeController@addUserTestimonial')->name('admin.add.user.testimonial');
+    Route::post('/edit/testimonial', '\App\Http\Controllers\Admin\HomeController@editUserTestimonial')->name('admin.edit.user.testimonial');
+    Route::get('delete-testimonial/{id}', '\App\Http\Controllers\Admin\HomeController@deleteTestimonial')->name('delete.user.testimonial');
 
 
     Route::get('/logout', '\App\Http\Controllers\Admin\DashboardController@logout')->name('logout');

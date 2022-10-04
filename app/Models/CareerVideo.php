@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Team extends Authenticatable
+class CareerVideo extends Authenticatable
 {
+    protected $table = 'home_videos';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'positions', 'profile_image', 'linked_link', 'twitter_link'
+        'video_url', 'video_name'
     ];
 }

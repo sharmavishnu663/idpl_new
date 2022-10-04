@@ -70,14 +70,14 @@
                     </div>
                 </div>
                 <div class="p-2">
-                    <a href="profile.html" class="dropdown-item">
+                    {{-- <a href="profile.html" class="dropdown-item">
                         <i class="fas fa-user opacity-50 align-middle me-2"></i>Profile</a>
                     <a href="account-general.html" class="dropdown-item">
                         <i class="fas fa-cogs opacity-50 align-middle me-2"></i>Settings</a>
                     <a href="page-tasks.html" class="dropdown-item">
-                        <i class="fas fa-list opacity-50 align-middle me-2"></i>Tasks</a>
+                        <i class="fas fa-list opacity-50 align-middle me-2"></i>Tasks</a> --}}
                     <hr class="mt-3 mb-1">
-                    <a href="page-auth-signin.html" class="dropdown-item d-flex align-items-center">
+                    <a href="{{ route('logout') }}" class="dropdown-item d-flex align-items-center">
                         <i class="fas fa-sign-out-alt opacity-50 align-middle me-2"></i>
                         Sign out
                     </a>

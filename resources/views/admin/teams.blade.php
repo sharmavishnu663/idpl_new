@@ -46,6 +46,8 @@
                                                     <th>Name</th>
                                                     <th>Position</th>
                                                     <th>Image</th>
+                                                    <th>LinkedIn Link</th>
+                                                    <th>Twitter Link</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -60,12 +62,20 @@
                                                         <td><img src="{{ asset('storage/' . $team->profile_image) }}"
                                                                 class="avatar lg rounded-circle me-2 mb-2" alt="">
                                                         </td>
+                                                        <td>{{ $team->linked_link }}
+
+                                                        </td>
+                                                        <td>{{ $team->twitter_link }}
+
+                                                        </td>
 
                                                         <td> <a class="js-edit-logo" data-bs-toggle="modal"
                                                                 href="#editModal" style="cursor:pointer" title="edit state"
                                                                 data-id="{{ @$team->id }}"
                                                                 data-name="{{ @$team->name }}"
                                                                 data-position="{{ @$team->positions }}"
+                                                                data-linked_link="{{ @$team->linked_link }}"
+                                                                data-twitter_link="{{ @$team->twitter_link }}"
                                                                 data-image="{{ asset('storage/' . $team->profile_image) }}"><i
                                                                     class="fa fa-edit"></i></a>
                                                             <a class="delete-material"
@@ -109,11 +119,18 @@
                                     <label for="maskPhone" class="form-label">Position</label>
                                     <input class="form-control mb-2" type="text" placeholder="position" name="positions"
                                         required>
+                                    <label for="maskPhone" class="form-label">Linked Link</label>
+                                    <input class="form-control mb-2" type="url" placeholder="Linked Link"
+                                        name="linked_link" required>
+                                    <label for="maskPhone" class="form-label">Twitter Link</label>
+                                    <input class="form-control mb-2" type="url" placeholder="Twitter Link"
+                                        name="twitter_link" required>
                                     {{-- <input class="form-control form-control-lg mb-2" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example"> --}}
 
                                     <label for="maskPhone" class="form-label">Image</label>
                                     <div class="mb-0">
-                                        <input class="form-control" type="file" name="profile_image" required>
+                                        <input class="form-control" type="file" name="profile_image"
+                                            accept="image/png, image/gif, image/jpeg" required>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +151,8 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalToggleLabel">Edit Team
                             </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <form action="{{ route('admin.edit.team') }}" method="post" enctype="multipart/form-data">
 
@@ -148,11 +166,18 @@
                                     <label for="maskPhone" class="form-label">Position</label>
                                     <input class="form-control mb-2" type="text" placeholder="position"
                                         name="positions" id="position" required>
+                                    <label for="maskPhone" class="form-label">Linked Link</label>
+                                    <input class="form-control mb-2" type="url" placeholder="Linked Link"
+                                        name="linked_link" id="linked_link" required>
+                                    <label for="maskPhone" class="form-label">Twitter Link</label>
+                                    <input class="form-control mb-2" type="url" placeholder="Twitter Link"
+                                        name="twitter_link" id="twitter_link" required>
                                     {{-- <input class="form-control form-control-lg mb-2" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example"> --}}
 
                                     <label for="maskPhone" class="form-label">Image</label>
                                     <div class="mb-0">
-                                        <input class="form-control" type="file" name="profile_image">
+                                        <input class="form-control" type="file" name="profile_image"
+                                            accept="image/png, image/gif, image/jpeg">
                                         <img src="{{ asset('storage/' . $team->profile_image) }}"
                                             class="avatar lg rounded-circle me-2 mb-2" alt="" id="team_image">
                                     </div>
@@ -178,10 +203,14 @@
             var name = $(this).attr('data-name');
             var position = $(this).attr('data-position');
             var image = $(this).attr('data-image');
+            var linked_link = $(this).attr('data-linked_link');
+            var twitter_link = $(this).attr('data-twitter_link');
 
             $("#editModal .modal-dialog #team_id").val(id);
             $("#editModal .modal-dialog #name").val(name);
             $("#editModal .modal-dialog #position").val(position);
+            $("#editModal .modal-dialog #linked_link").val(linked_link);
+            $("#editModal .modal-dialog #twitter_link").val(twitter_link);
             $("#editModal .modal-dialog #team_image").attr("src", image);
 
         });

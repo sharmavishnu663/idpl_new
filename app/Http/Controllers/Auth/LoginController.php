@@ -39,31 +39,36 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
+    public function redirectRoute()
+    {
+        $user = Auth::user();
+        if ($user) {
+            return redirect()->back();
+        } else {
+            return redirect()->route('admin.showlogin');
+        }
+    }
+
     public function doLogin(Request $request)
     {
         $rules = array(
             'email' => 'required|email',
-            'password' => 'required');
+            'password' => 'required'
+        );
 
-        $validator = Validator::make($request->all() , $rules);
-        if ($validator->fails())
-        {
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)
                 ->withInput($request->except('password'));
-        }
-        else
-        {
+        } else {
             $userdata = array(
-                'email' => $request->email ,
+                'email' => $request->email,
                 'password' => $request->password,
             );
 
-            if (Auth::attempt($userdata))
-            {
+            if (Auth::attempt($userdata)) {
                 return redirect()->route('admin.dashboard');
-            }
-            else
-            {
+            } else {
                 return Redirect::back()->withInput($request->except('password'))
                     ->withErrors(['Something went wrong!']);
             }
@@ -93,14 +98,13 @@ class LoginController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput($request->except('password'));
-
         } else {
             unset($requestData['_token']);
             $requestData['password'] = bcrypt($request->password);
-            $requestData['status'] =1;
+            $requestData['status'] = 1;
             $requestData['role_type'] = 'admin';
             if ($request->file('profile_image')) {
-//            profile image upload
+                //            profile image upload
                 $profileImage = $request->file('profile_image');
                 $profileName = time() . 'profile.' . $profileImage->getClientOriginalExtension();
                 Storage::disk('public')->put($profileName,  File::get($profileImage));
@@ -111,6 +115,4 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard');
         }
     }
-
-
 }

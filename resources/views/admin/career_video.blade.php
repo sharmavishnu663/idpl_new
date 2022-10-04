@@ -22,13 +22,13 @@
             <div class="position-relative container-fluid px-0">
                 <div class="row align-items-center position-relative">
                     <div class="col-md-8 mb-4 mb-md-0">
-                        <h3 class="mb-2">About Video</h3>
+                        <h3 class="mb-2">Career Video</h3>
 
 
                     </div>
                     <div class="card-tools">
                         <button class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle"
-                            style="float: right">Add Video</button>
+                            style="float: right">Add Career Video</button>
 
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($aboutVideos as $video)
+                                                @foreach ($careerVideos as $video)
                                                     <tr>
                                                         <td>
 
@@ -80,10 +80,10 @@
                                                         <td>
                                                             @if ($video->active)
                                                                 <a
-                                                                    href="{{ route('status.about.video', @$video->id) }}">Published</a>
+                                                                    href="{{ route('status.career.video', @$video->id) }}">Published</a>
                                                             @else
                                                                 <a
-                                                                    href="{{ route('status.about.video', @$video->id) }}">Unpublished</a>
+                                                                    href="{{ route('status.career.video', @$video->id) }}">Unpublished</a>
                                                             @endif
                                                         </td>
                                                         <td> <a class="js-edit-logo" data-bs-toggle="modal"
@@ -93,7 +93,7 @@
                                                                 data-video="{{ $video->video_name ? asset('storage/' . $video->video_name) : '' }}"><i
                                                                     class="fa fa-edit"></i></a>
                                                             <a class="delete-material"
-                                                                href="{{ route('delete.about.video', @$video->id) }}"
+                                                                href="{{ route('delete.career.video', @$video->id) }}"
                                                                 title="delete logo"
                                                                 onClick="return  confirm('Are you sure you want to delete ?')"><i
                                                                     class="fa fa-trash-alt"></i></a>
@@ -118,11 +118,11 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">Add Video
+                            <h5 class="modal-title" id="exampleModalToggleLabel">Add Career Videos
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('admin.add.about.video') }}" method="post" enctype="multipart/form-data"
+                        <form action="{{ route('admin.add.career.video') }}" method="post" enctype="multipart/form-data"
                             id="addVideo" onsubmit="return formsubmit(this)">
 
                             @csrf
@@ -173,12 +173,12 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">Edit Video
+                            <h5 class="modal-title" id="exampleModalToggleLabel">Edit Career Video
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('admin.edit.about.video') }}" method="post"
+                        <form action="{{ route('admin.edit.career.video') }}" method="post"
                             enctype="multipart/form-data">
 
                             @csrf
