@@ -6,10 +6,12 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Models\AboutVideo;
+use App\Models\CareerVideo;
 use App\Models\ContactAddress;
 use App\Models\ContactPost;
 use App\Models\Gallary;
 use App\Models\PrivacyPolicy;
+use App\Models\SharedResume;
 use App\Models\Team;
 use App\Models\Term;
 use App\Models\UserCount;
@@ -29,6 +31,8 @@ use Response;
 class APIController extends Controller
 {
 
+    // gallery list api
+
     public function gallaryList()
     {
         try {
@@ -40,6 +44,8 @@ class APIController extends Controller
             return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
         }
     }
+
+    // privacy policy api
 
     public function privacyPolicyList()
     {
@@ -53,6 +59,8 @@ class APIController extends Controller
         }
     }
 
+    // terms and conditions api
+
     public function termsList()
     {
         try {
@@ -65,6 +73,7 @@ class APIController extends Controller
         }
     }
 
+    // contact address api
     public function contactAddressList()
     {
         try {
@@ -77,7 +86,7 @@ class APIController extends Controller
         }
     }
 
-
+    // team list api
     public function teamList()
     {
         try {
@@ -89,6 +98,8 @@ class APIController extends Controller
             return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
         }
     }
+
+    //  about video api
 
     public function aboutVideoList()
     {
@@ -102,6 +113,22 @@ class APIController extends Controller
         }
     }
 
+    //  career video api
+
+    public function careerVideoList()
+    {
+        try {
+            $careerVideoList = CareerVideo::where('active', 1)->first();
+            $response = ['success' => true, 'message' => 'Video get successfully', 'data' => $careerVideoList];
+            return Response::json($response, 200);
+        } catch (Exception $e) {
+
+            return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
+        }
+    }
+
+    // user count list
+
     public function userCountsList()
     {
         try {
@@ -114,6 +141,7 @@ class APIController extends Controller
         }
     }
 
+    // user testimonial list
     public function userTestimonialList()
     {
         try {
@@ -125,6 +153,8 @@ class APIController extends Controller
             return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
         }
     }
+
+    // form post api
 
     public function postForm(Request $request)
     {
@@ -161,6 +191,8 @@ class APIController extends Controller
         }
     }
 
+    // email subscription api
+
     public function emailSubscription(Request $request)
     {
         try {
@@ -184,6 +216,48 @@ class APIController extends Controller
                     // });
                 }
                 $response = ['success' => true, 'message' => 'Email sent successfully'];
+            }
+            return Response::json($response, 200);
+        } catch (Exception $e) {
+
+            return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
+        }
+    }
+
+    // Resume shared api
+    public function sharedResume(Request $request)
+    {
+        try {
+
+            $rules = [
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'mobile' => 'required',
+                'email' => 'required',
+                'department' => 'required',
+                'location' => 'required',
+                'position' => 'required',
+                'resume' => 'required|mimes:doc,docx,pdf|max:2048',
+            ];
+            $requestData = $request->all();
+            $validator = Validator::make($requestData, $rules);
+            if ($validator->fails()) {
+
+                $response = ['success' => false, 'message' => $validator->errors()->all()];
+            } else {
+                if ($request->resume) {
+                    $resumeName = $request->file('resume');
+                    $resume = time() . 'resume.' . $resumeName->getClientOriginalExtension();
+                    Storage::disk('public')->put($resume,  File::get($resumeName));
+                    $requestData['resume'] = $resume;
+                    // $path = Storage::disk('s3')->put('images', $request->image);
+
+                    // $path = Storage::disk('s3')->url($path);
+                    // $gallary->image =  $requestData['image'];
+                    // $gallary->save();
+                }
+                $contactForm = SharedResume::create($requestData);
+                $response = ['success' => true, 'message' => 'Resume send successfully'];
             }
             return Response::json($response, 200);
         } catch (Exception $e) {

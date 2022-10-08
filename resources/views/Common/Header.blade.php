@@ -1,6 +1,6 @@
 <!--//page-header//-->
 <header class="navbar py-0 page-header border-bottom navbar-expand navbar-light px-4">
-    <a href="index.html" class="navbar-brand d-block d-lg-none">
+    <a href="/" class="navbar-brand d-block d-lg-none">
         <div class="d-flex align-items-center flex-no-wrap text-truncate">
             <!--Sidebar-icon-->
             <span class="sidebar-icon bg-primary rounded-circle size-40 text-white">

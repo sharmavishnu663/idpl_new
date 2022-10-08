@@ -16,7 +16,7 @@ class CreateContactPostFormsTable extends Migration
         Schema::create('contact_post_forms', function (Blueprint $table) {
             $table->id();
             $table->string('name', 150)->nullable();
-            $table->integer('mobile')->nullable();
+            $table->string('mobile', 100)->nullable();
             $table->string('email', 150)->nullable();
             $table->string('location')->nullable();
             $table->string('city')->nullable();

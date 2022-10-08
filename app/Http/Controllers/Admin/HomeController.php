@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CareerVideo;
+use App\Models\Job;
+use App\Models\SharedResume;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
@@ -18,6 +20,7 @@ use Response;
 
 class HomeController extends Controller
 {
+    // user testimonial start
 
     public function userTestimonial()
     {
@@ -27,7 +30,6 @@ class HomeController extends Controller
 
     public function addUserTestimonial(Request $request)
     {
-        // dd($request);
         $rules = [
             'name' => 'required',
             'designation' =>  'required',
@@ -89,8 +91,10 @@ class HomeController extends Controller
         UserTestimonial::where('id', $id)->delete();
         return Redirect::route('admin.user.testimonial')->with('success', 'User Testimonial deleted successfully!');
     }
+    // user testimonial end
 
 
+    // Career Video start
     public function careerVideo()
     {
         $careerVideos = CareerVideo::all();
@@ -173,5 +177,75 @@ class HomeController extends Controller
         } else {
             return Redirect::route('admin.career.video')->with('error', 'Data Not Found!');
         }
+    }
+
+    // career video end
+
+    // Jobs start
+
+    public function jobs()
+    {
+        $jobs = Job::all();
+        return view('admin.jobs', compact('jobs'));
+    }
+
+    public function addJobs(Request $request)
+    {
+        $rules = [
+            'title' => 'required',
+            'department' => 'required',
+            'location' => 'required',
+            'role' => 'required',
+            'status' => 'required',
+        ];
+
+        $requestData = $request->all();
+        $validator = Validator::make($requestData, $rules);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+            Job::create($requestData);
+            return Redirect::route('admin.jobs')->with('success', 'Job added successfully!');
+        }
+    }
+
+
+    public function editJobs(Request $request)
+    {
+        $rules = [
+            'id' => 'required',
+            'title' => 'required',
+            'department' => 'required',
+            'location' => 'required',
+            'role' => 'required',
+            'status' => 'required',
+        ];
+
+        $requestData = $request->all();
+        $validator = Validator::make($requestData, $rules);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+
+            unset($requestData['_token']);
+            $contactAdd = Job::where('id', $request->id)->update($requestData);
+
+            return Redirect::route('admin.jobs')->with('success', 'Job update successfully!');
+        }
+    }
+
+    public function deleteJobs($id)
+    {
+        Job::where('id', $id)->delete();
+        return Redirect::route('admin.jobs')->with('success', 'Job deleted successfully!');
+    }
+    // Jobs End
+
+    public function resumeShared()
+    {
+        $resumes = SharedResume::all();
+        return view('admin.shared_job', compact('resumes'));
     }
 }

@@ -73,6 +73,15 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/edit/testimonial', '\App\Http\Controllers\Admin\HomeController@editUserTestimonial')->name('admin.edit.user.testimonial');
     Route::get('delete-testimonial/{id}', '\App\Http\Controllers\Admin\HomeController@deleteTestimonial')->name('delete.user.testimonial');
 
+    // Jobs route
+    Route::get('/jobs', 'App\Http\Controllers\Admin\HomeController@jobs')->name('admin.jobs');
+    Route::post('/add/job', 'App\Http\Controllers\Admin\HomeController@addJobs')->name('admin.add.job');
+    Route::post('/edit/job', '\App\Http\Controllers\Admin\HomeController@editJobs')->name('admin.edit.job');
+    Route::get('delete-job/{id}', '\App\Http\Controllers\Admin\HomeController@deleteJobs')->name('delete.job');
+
+    // Jobs route
+    Route::get('/job-applied', 'App\Http\Controllers\Admin\HomeController@resumeShared')->name('admin.resume.shared');
+
 
     Route::get('/logout', '\App\Http\Controllers\Admin\DashboardController@logout')->name('logout');
 });

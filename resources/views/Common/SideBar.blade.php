@@ -3,22 +3,16 @@
     <div class="h-100 flex-column d-flex" data-simplebar>
         <!--Aside-logo-->
         <div class="aside-logo p-3 position-relative">
-            <a href="index.html" class="d-block pe-2">
+            <a href="/" class="d-block pe-2">
                 <div class="d-flex align-items-center flex-no-wrap text-truncate">
                     <!--Sidebar-icon-->
-                    <span class="sidebar-icon fs-5 lh-1 text-white rounded-circle bg-primary">
-                        <svg width="16" height="18" viewBox="0 0 11 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.399994" width="4" height="12" fill="white" />
-                            <path
-                                d="M5.89998 9.6C7.1465 9.6 8.34196 9.09429 9.22338 8.19411C10.1048 7.29394 10.6 6.07304 10.6 4.8C10.6 3.52696 10.1048 2.30606 9.22338 1.40589C8.34196 0.505713 7.1465 2.4787e-07 5.89998 0L5.89998 4.8L5.89998 9.6Z"
-                                fill="white" />
-                        </svg>
-                    </span>
+                    {{-- <span class="sidebar-icon fs-5 lh-1 text-white rounded-circle bg-primary"> --}}
+                    <img src="{{ asset('assets/media/favicon.png') }}">
+                    {{-- </span> --}}
                     <span class="sidebar-text">
                         <!--Sidebar-text-->
                         <span class="sidebar-text text-truncate fs-4 text-uppercase fw-bolder">
-                            Panel
+                            Admin
                         </span>
                     </span>
                 </div>
@@ -165,6 +159,28 @@
                             </span>
                             <!--Sidebar nav text-->
                             <span class="sidebar-text">User Testimonial</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.jobs') }}" data-bs-toggle="" aria-expanded="false"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.jobs' ? 'active' : '' }}">
+                            <span class="sidebar-icon">
+                                <i class="fa fa-solid fa-brain"></i>
+                            </span>
+                            <!--Sidebar nav text-->
+                            <span class="sidebar-text">Jobs</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.resume.shared') }}" data-bs-toggle="" aria-expanded="false"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.resume.shared' ? 'active' : '' }}">
+                            <span class="sidebar-icon">
+                                <i class="fa fa-solid fa-book"></i>
+                            </span>
+                            <!--Sidebar nav text-->
+                            <span class="sidebar-text">Resume Shared</span>
                         </a>
                     </li>
 
