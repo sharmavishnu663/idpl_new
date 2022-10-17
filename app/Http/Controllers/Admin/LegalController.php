@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Gallary;
 use App\Models\PrivacyPolicy;
+use App\Models\ProductCategory;
 use App\Models\Team;
 use App\Models\Term;
 use App\Models\UserCount;
@@ -126,6 +127,61 @@ class LegalController extends Controller
         return Redirect::route('admin.terms')->with('success', 'Terms & Conditions deleted successfully!');
     }
 
+    public function categoryProducts()
+    {
+        $product_categories = ProductCategory::all();
+        return view('admin.product_category', compact('product_categories'));
+    }
+
+    public function addCategoryProduct(Request $request)
+    {
+        // dd($request);
+        $rules = [
+            'name' =>  'required',
+        ];
+
+        $requestData = $request->all();
+        $validator = Validator::make($requestData, $rules);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+
+            ProductCategory::create($requestData);
+            return Redirect::route('admin.category.product')->with('success', 'Category  added successfully!');
+        }
+    }
+
+
+    public function editCategoryProduct(Request $request)
+    {
+        $rules = [
+            'id' => 'required',
+            'name' =>  'required',
+        ];
+
+        $requestData = $request->all();
+        $validator = Validator::make($requestData, $rules);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+
+            $product = ProductCategory::find($request->id);
+
+            $product->name =  $requestData['name'];
+            $product->save();
+
+            return Redirect::route('admin.category.product')->with('success', 'Category update successfully!');
+        }
+    }
+
+    public function deleteCategoryProduct($id)
+    {
+        ProductCategory::where('id', $id)->delete();
+        return Redirect::route('admin.category.product')->with('success', 'Category deleted successfully!');
+    }
+
 
     public function contactAddress()
     {
@@ -213,8 +269,10 @@ class LegalController extends Controller
             if ($request->profile_image) {
                 $profileImage = $request->file('profile_image');
                 $profileName = time() . 'team.' . $profileImage->getClientOriginalExtension();
-                Storage::disk('public')->put($profileName,  File::get($profileImage));
-                $requestData['profile_image'] = $profileName;
+                $path = Storage::disk('s3')->put('images', $request->profile_image);
+                $path = Storage::disk('s3')->url($path);
+                // Storage::disk('public')->put($profileName,  File::get($profileImage));
+                $requestData['profile_image'] = $path;
 
                 // $path = Storage::disk('s3')->put('images', $request->image);
 
@@ -248,8 +306,11 @@ class LegalController extends Controller
             if ($request->profile_image) {
                 $profileImage = $request->file('profile_image');
                 $profileName = time() . 'team.' . $profileImage->getClientOriginalExtension();
-                Storage::disk('public')->put($profileName,  File::get($profileImage));
-                $requestData['profile_image'] = $profileName;
+                $path = Storage::disk('s3')->put('images', $request->profile_image);
+                $path = Storage::disk('s3')->url($path);
+                $requestData['profile_image'] = $path;
+                // Storage::disk('public')->put($profileName,  File::get($profileImage));
+                // $requestData['profile_image'] = $profileName;
 
                 // $path = Storage::disk('s3')->put('images', $request->image);
 
@@ -283,8 +344,10 @@ class LegalController extends Controller
         if ($request->video_name) {
             $aboutVideo = $request->file('video_name');
             $videoName = time() . 'aboutVideo.' . $aboutVideo->getClientOriginalExtension();
-            Storage::disk('public')->put($videoName,  File::get($aboutVideo));
-            $requestData['video_name'] = $videoName;
+            $path = Storage::disk('s3')->put('images', $request->video_name);
+
+            $path = Storage::disk('s3')->url($path);
+            $requestData['video_name'] = $path;
             // $path = Storage::disk('s3')->put('images', $request->image);
 
             // $path = Storage::disk('s3')->url($path);
@@ -315,11 +378,12 @@ class LegalController extends Controller
             if ($request->video_name) {
                 $aboutVideo = $request->file('video_name');
                 $videoName = time() . 'aboutVideo.' . $aboutVideo->getClientOriginalExtension();
-                Storage::disk('public')->put($videoName,  File::get($aboutVideo));
-                $requestData['video_name'] = $videoName;
-                // $path = Storage::disk('s3')->put('images', $request->image);
+                // Storage::disk('public')->put($videoName,  File::get($aboutVideo));
 
-                // $path = Storage::disk('s3')->url($path);
+                $path = Storage::disk('s3')->put('images', $request->video_name);
+
+                $path = Storage::disk('s3')->url($path);
+                $requestData['video_name'] = $path;
                 // $gallary->image =  $requestData['image'];
                 // $gallary->save();
             }

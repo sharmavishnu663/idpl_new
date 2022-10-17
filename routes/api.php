@@ -38,3 +38,11 @@ Route::post('post-form', '\App\Http\Controllers\Api\APIController@postForm')->na
 Route::post('email-Subscription', '\App\Http\Controllers\Api\APIController@emailSubscription')->name('email.subscription'); // email subscription api
 
 Route::post('share-resume', '\App\Http\Controllers\Api\APIController@sharedResume')->name('share.resume'); // resume shared api
+
+Route::get('product-list', '\App\Http\Controllers\Api\APIController@productList')->name('product.list'); // product api
+
+Route::get('jobs-list', '\App\Http\Controllers\Api\APIController@jobsList')->name('jobs.list'); // job list api
+
+Route::get('corporate-list', '\App\Http\Controllers\Api\APIController@corporateList')->name('corporate.list'); // corporate list api
+
+Route::post('corporate-fom', '\App\Http\Controllers\Api\APIController@presentationData')->name('corporate.form'); // corporate list api

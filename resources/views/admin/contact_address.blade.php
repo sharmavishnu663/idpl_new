@@ -20,7 +20,7 @@
             <div class="position-relative container-fluid px-0">
                 <div class="row align-items-center position-relative">
                     <div class="col-md-8 mb-4 mb-md-0">
-                        <h3 class="mb-2">Contact Addresses</h3>
+                        <h3 class="mb-2">Contact Address</h3>
                     </div>
                     <div class="card-tools">
                         <button class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle"
@@ -68,8 +68,8 @@
                                                         <td>{{ $address->tag }}
                                                         </td>
                                                         <td> <a class="js-edit-logo" data-bs-toggle="modal"
-                                                                href="#editModal" style="cursor:pointer" title="edit state"
-                                                                data-id="{{ @$address->id }}"
+                                                                href="#editModal" style="cursor:pointer"
+                                                                title="edit Contact Address" data-id="{{ @$address->id }}"
                                                                 data-office="{{ @$address->office }}"
                                                                 data-email="{{ @$address->email }}"
                                                                 data-address1="{{ @$address->address1 }}"
@@ -153,7 +153,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">Edit Terms & Conditions
+                            <h5 class="modal-title" id="exampleModalToggleLabel">Edit Contact Address
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>

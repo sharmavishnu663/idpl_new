@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', '\App\Http\Controllers\Auth\LoginController@redirectRoute');
+// Route::get('/home', '\App\Http\Controllers\Auth\LoginController@redirectRoute');
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', '\App\Http\Controllers\Auth\LoginController@showLoginForm')->name('admin.showlogin');
     Route::post('/login', '\App\Http\Controllers\Auth\LoginController@doLogin')->name('admin.login');
@@ -79,8 +80,38 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/edit/job', '\App\Http\Controllers\Admin\HomeController@editJobs')->name('admin.edit.job');
     Route::get('delete-job/{id}', '\App\Http\Controllers\Admin\HomeController@deleteJobs')->name('delete.job');
 
+    // products route
+    Route::get('/products', 'App\Http\Controllers\Admin\DashboardController@products')->name('admin.products');
+    Route::post('/add/product', 'App\Http\Controllers\Admin\DashboardController@addProduct')->name('admin.add.product');
+    Route::post('/edit/product', '\App\Http\Controllers\Admin\DashboardController@editProduct')->name('admin.edit.product');
+    Route::get('delete-product/{id}', '\App\Http\Controllers\Admin\DashboardController@deleteProduct')->name('delete.product');
+
+    // Category Product route
+    Route::get('/category-product', 'App\Http\Controllers\Admin\LegalController@categoryProducts')->name('admin.category.product');
+    Route::post('/add/category-product', 'App\Http\Controllers\Admin\LegalController@addCategoryProduct')->name('admin.add.category.product');
+    Route::post('/edit/category-product', '\App\Http\Controllers\Admin\LegalController@editCategoryProduct')->name('admin.edit.category.product');
+    Route::get('delete-category-product/{id}', '\App\Http\Controllers\Admin\LegalController@deleteCategoryProduct')->name('delete.category.product');
+
+    // Product theme route
+    Route::get('/product-theme', 'App\Http\Controllers\Admin\DashboardController@themeProducts')->name('admin.product.theme');
+    Route::post('/add/product-theme', 'App\Http\Controllers\Admin\DashboardController@addThemeProduct')->name('admin.add.product.theme');
+    Route::post('/edit/product-theme', '\App\Http\Controllers\Admin\DashboardController@editThemeProduct')->name('admin.edit.product.theme');
+    Route::get('delete-product-theme/{id}', '\App\Http\Controllers\Admin\DashboardController@deleteThemeProduct')->name('delete.product.theme');
+
+    // Gallary route
+    Route::get('/corporate', '\App\Http\Controllers\Admin\DashboardController@corporate')->name('admin.corporate');
+    Route::post('/add/corporate', '\App\Http\Controllers\Admin\DashboardController@addCorporate')->name('admin.add.corporate');
+    Route::post('/edit/corporate', '\App\Http\Controllers\Admin\DashboardController@editCorporate')->name('admin.edit.corporate');
+    Route::get('/delete/corporate/{id}', '\App\Http\Controllers\Admin\DashboardController@deleteCorporate')->name('admin.delete.corporate');
+
+
     // Jobs route
     Route::get('/job-applied', 'App\Http\Controllers\Admin\HomeController@resumeShared')->name('admin.resume.shared');
+
+    // theme change api
+
+    Route::post('/theme-change', 'App\Http\Controllers\Admin\HomeController@themeChange')->name('admin.theme.change');
+
 
 
     Route::get('/logout', '\App\Http\Controllers\Admin\DashboardController@logout')->name('logout');

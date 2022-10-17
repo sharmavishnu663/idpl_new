@@ -59,7 +59,7 @@
                                                         <td>{{ $team->positions }}
 
                                                         </td>
-                                                        <td><img src="{{ asset('storage/' . $team->profile_image) }}"
+                                                        <td><img src="{{ $team->profile_image }}"
                                                                 class="avatar lg rounded-circle me-2 mb-2" alt="">
                                                         </td>
                                                         <td>{{ $team->linked_link }}
@@ -70,17 +70,17 @@
                                                         </td>
 
                                                         <td> <a class="js-edit-logo" data-bs-toggle="modal"
-                                                                href="#editModal" style="cursor:pointer" title="edit state"
+                                                                href="#editModal" style="cursor:pointer" title="edit team"
                                                                 data-id="{{ @$team->id }}"
                                                                 data-name="{{ @$team->name }}"
                                                                 data-position="{{ @$team->positions }}"
                                                                 data-linked_link="{{ @$team->linked_link }}"
                                                                 data-twitter_link="{{ @$team->twitter_link }}"
-                                                                data-image="{{ asset('storage/' . $team->profile_image) }}"><i
+                                                                data-image="{{ $team->profile_image }}"><i
                                                                     class="fa fa-edit"></i></a>
                                                             <a class="delete-material"
                                                                 href="{{ route('delete.team', @$team->id) }}"
-                                                                title="delete logo"
+                                                                title="delete team"
                                                                 onClick="return  confirm('Are you sure you want to delete ?')"><i
                                                                     class="fa fa-trash-alt"></i></a>
                                                         </td>
@@ -178,8 +178,7 @@
                                     <div class="mb-0">
                                         <input class="form-control" type="file" name="profile_image"
                                             accept="image/png, image/gif, image/jpeg">
-                                        <img src="{{ asset('storage/' . $team->profile_image) }}"
-                                            class="avatar lg rounded-circle me-2 mb-2" alt="" id="team_image">
+                                        <img class="avatar lg rounded-circle me-2 mb-2" alt="" id="team_image">
                                     </div>
                                 </div>
                             </div>

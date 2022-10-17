@@ -90,9 +90,33 @@
 
                             </span>
                             <!--Sidebar nav text-->
-                            <span class="sidebar-text">Terms</span>
+                            <span class="sidebar-text">Terms & Conditions</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.products' || Route::current()->getName() == 'admin.category.product' || Route::current()->getName() == 'admin.product.theme' ? 'active' : '' }}"
+                            aria-expanded="false" href="#ui-pages2">
+                            <span class="sidebar-icon">
+                                <i class="fa fa-solid fa-brain"></i>
+                            </span>
+                            <!--Sidebar nav text-->
+                            <span class="sidebar-text">Product Details</span>
+                        </a>
+                        <ul id="ui-pages2" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item"><a class="sidebar-link"
+                                    href="{{ route('admin.category.product') }}">Category</a>
+                            </li>
+                            <li class="sidebar-item"><a class="sidebar-link"
+                                    href="{{ route('admin.product.theme') }}">Product Theme</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link"
+                                    href="{{ route('admin.products') }}">Products</a></li>
+
+
+
+                        </ul>
+                    </li>
+
 
                     <li class="nav-item">
                         <a href="{{ route('admin.contact.address') }}" data-bs-toggle="" aria-expanded="false"
@@ -181,6 +205,25 @@
                             </span>
                             <!--Sidebar nav text-->
                             <span class="sidebar-text">Resume Shared</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.corporate') }}" data-bs-toggle="" aria-expanded="false"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::current()->getName() == 'admin.corporate' ? 'active' : '' }} ">
+                            <span class="sidebar-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16"
+                                    height="16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.177 7.823l2.396-2.396A.25.25 0 017 5.604v4.792a.25.25 0 01-.427.177L4.177 8.177a.25.25 0 010-.354z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm1.75-.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25H9.5v-13H1.75zm12.5 13H11v-13h3.25a.25.25 0 01.25.25v12.5a.25.25 0 01-.25.25z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <!--Sidebar nav text-->
+                            <span class="sidebar-text">Corporate File</span>
                         </a>
                     </li>
 

@@ -415,125 +415,28 @@
         <div class="position-relative container-fluid px-0">
             <div class="row align-items-center position-relative">
                 <div class="col-md-5 mb-3 mb-lg-0">
-                    <h3 class="mb-2">Welcome back, Adam!</h3>
+                    <h3 class="mb-2">Welcome back, Admin!</h3>
 
-                    <nav aria-label="breadcrumb">
+                    {{-- <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item"><a href="#!" class="">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                             <li class="breadcrumb-item active">Default</li>
                         </ol>
-                    </nav>
+                    </nav> --}}
                 </div>
-                <div class="col-md-7 text-md-end">
-                    <div class="d-flex justify-content-md-end align-items-center">
-                        <div id="reportrange" class="btn btn-gray">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                <path fill-rule="evenodd"
-                                    d="M4.75 0a.75.75 0 01.75.75V2h5V.75a.75.75 0 011.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0113.25 16H2.75A1.75 1.75 0 011 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 014.75 0zm0 3.5h8.5a.25.25 0 01.25.25V6h-11V3.75a.25.25 0 01.25-.25h2zm-2.25 4v6.75c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25V7.5h-11z"
-                                    fill="currentColor"></path>
-                            </svg>
-                            <span class="small d-inline-block ms-1"></span>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
     <!--//Page Toolbar End//-->
 
     <!--//Page content//-->
-    <div class="content p-4 pb-0 d-flex flex-column-fluid position-relative">
-        <div class="container-fluid px-0">
-            <div class="row">
-                <div class="col-12 col-xl-3 col-sm-6 mb-4">
-                    <!-- Card-->
-                    <div class="card overflow-hidden">
-                        <div class="card-body d-flex align-items-center justify-content-between">
-                            <div
-                                class="flex-shrink-0 size-60 bg-warning text-white me-3 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-users fs-3"></i>
-                            </div>
-                            <div class="flex-grow-1 text-start">
-                                <h5 class="fs-4 d-block mb-1" data-aos data-aos-id="countup:in" data-to="475"
-                                    data-countup='{"startVal":"0","prefix":"+"}'>
-                                    0
-                                </h5>
-                                <p class="mb-0 text-muted">New Customers</p>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-xl-3 col-sm-6 mb-4">
-                    <!-- Card-->
-                    <div class="card overflow-hidden">
-                        <div class="card-body d-flex align-items-center justify-content-between">
-                            <div
-                                class="flex-shrink-0 size-60 bg-tint-primary text-primary me-3 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-hand-holding-usd fs-3"></i>
-                            </div>
-                            <div class="flex-grow-1 text-start">
-                                <h5 class="fs-4 d-block mb-1" data-aos data-aos-id="countup:in" data-to="37475"
-                                    data-countup='{"startVal":"0","prefix":"$"}'>
-                                    0
-                                </h5>
-                                <p class="mb-0 text-muted">Revenue</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-3 col-sm-6 mb-4">
-                    <!-- Card-->
-                    <div class="card overflow-hidden">
-                        <div class="card-body d-flex align-items-center justify-content-between">
-                            <div
-                                class="flex-shrink-0 size-60 bg-tint-success text-success me-3 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-eye fs-3"></i>
-                            </div>
-                            <div class="flex-grow-1 text-start">
-                                <h5 class="fs-4 d-block mb-1" data-aos data-aos-id="countup:in" data-to="547"
-                                    data-countup='{"startVal":"0","suffix":"k"}'>
-                                    0
-                                </h5>
-                                <p class="mb-0 text-muted">Total Vistors</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-3 col-sm-6 mb-4">
-                    <!-- Card-->
-                    <div class="card overflow-hidden">
-                        <div class="card-body d-flex align-items-center justify-content-between">
-                            <div
-                                class="flex-shrink-0 size-60 bg-tint-danger text-danger me-3 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-shipping-fast fs-3"></i>
-                            </div>
-                            <div class="flex-grow-1 text-start">
-                                <h5 class="fs-4 d-block mb-1" data-aos data-aos-id="countup:in" data-to="4468"
-                                    data-countup='{"startVal":"0","prefix":"+"}'>
-                                    0
-                                </h5>
-                                <p class="mb-0 text-muted">Total Sales</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--row-->
-
-        </div>
-    </div>
     <!--//Page content End//-->
 
     <!--//Page-footer//-->
-    <footer class="pb-4">
+    {{-- <footer class="pb-4">
         <div class="container-fluid px-4">
             <span class="d-block lh-sm small text-muted text-end">&copy;
                 <script>
@@ -541,7 +444,7 @@
                 </script>. Copyright
             </span>
         </div>
-    </footer>
+    </footer> --}}
     <!--/.Page Footer End-->
 
     </main>

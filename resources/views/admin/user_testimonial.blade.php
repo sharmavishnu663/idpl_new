@@ -17,13 +17,13 @@
             <div class="position-relative container-fluid px-0">
                 <div class="row align-items-center position-relative">
                     <div class="col-md-8 mb-4 mb-md-0">
-                        <h3 class="mb-2">Testinomials</h3>
+                        <h3 class="mb-2">Testimonials</h3>
 
 
                     </div>
                     <div class="card-tools">
                         <button class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle"
-                            style="float: right">Add Testinomial</button>
+                            style="float: right">Add Testimonial</button>
 
                     </div>
                 </div>
@@ -61,21 +61,21 @@
                                                         <td>{{ $team->description }}
 
                                                         </td>
-                                                        <td><img src="{{ asset('storage/' . $team->image) }}"
+                                                        <td><img src="{{ $team->image }}"
                                                                 class="avatar lg rounded-circle me-2 mb-2" alt="">
                                                         </td>
 
                                                         <td> <a class="js-edit-logo" data-bs-toggle="modal"
-                                                                href="#editModal" style="cursor:pointer" title="edit state"
-                                                                data-id="{{ @$team->id }}"
+                                                                href="#editModal" style="cursor:pointer"
+                                                                title="edit testimonial" data-id="{{ @$team->id }}"
                                                                 data-name="{{ @$team->name }}"
                                                                 data-designation="{{ @$team->designation }}"
                                                                 data-description="{{ @$team->description }}"
-                                                                data-image="{{ asset('storage/' . $team->image) }}"><i
+                                                                data-image="{{ $team->image }}"><i
                                                                     class="fa fa-edit"></i></a>
                                                             <a class="delete-material"
                                                                 href="{{ route('delete.user.testimonial', @$team->id) }}"
-                                                                title="delete logo"
+                                                                title="delete testimonial"
                                                                 onClick="return  confirm('Are you sure you want to delete ?')"><i
                                                                     class="fa fa-trash-alt"></i></a>
                                                         </td>
@@ -99,7 +99,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">Add Testinomial
+                            <h5 class="modal-title" id="exampleModalToggleLabel">Add Testimonial
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -140,7 +140,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">Edit Testinomial
+                            <h5 class="modal-title" id="exampleModalToggleLabel">Edit Testimonial
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>

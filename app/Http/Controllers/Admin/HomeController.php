@@ -46,8 +46,10 @@ class HomeController extends Controller
             if ($request->image) {
                 $image = $request->file('image');
                 $profileName = time() . 'testinomial.' . $image->getClientOriginalExtension();
-                Storage::disk('public')->put($profileName,  File::get($image));
-                $requestData['image'] = $profileName;
+                $path = Storage::disk('s3')->put('images', $request->image);
+                $path = Storage::disk('s3')->url($path);
+                // Storage::disk('public')->put($profileName,  File::get($image));
+                $requestData['image'] = $path;
             }
             UserTestimonial::create($requestData);
             return Redirect::route('admin.user.testimonial')->with('success', 'User Testimonial added successfully!');
@@ -74,8 +76,10 @@ class HomeController extends Controller
             if ($request->image) {
                 $image = $request->file('image');
                 $profileName = time() . 'testinomial.' . $image->getClientOriginalExtension();
-                Storage::disk('public')->put($profileName,  File::get($image));
-                $requestData['image'] = $profileName;
+                $path = Storage::disk('s3')->put('images', $request->image);
+                $path = Storage::disk('s3')->url($path);
+                //     Storage::disk('public')->put($profileName,  File::get($image));
+                $requestData['image'] = $path;
             }
             $userTestinomial = UserTestimonial::find($request->id);
             unset($requestData['_token']);
@@ -107,8 +111,10 @@ class HomeController extends Controller
         if ($request->video_name) {
             $careerVideo = $request->file('video_name');
             $videoName = time() . 'aboutVideo.' . $careerVideo->getClientOriginalExtension();
-            Storage::disk('public')->put($videoName,  File::get($careerVideo));
-            $requestData['video_name'] = $videoName;
+            $path = Storage::disk('s3')->put('images', $request->video_name);
+            $path = Storage::disk('s3')->url($path);
+            // Storage::disk('public')->put($videoName,  File::get($careerVideo));
+            $requestData['video_name'] = $path;
             // $path = Storage::disk('s3')->put('images', $request->image);
 
             // $path = Storage::disk('s3')->url($path);
@@ -139,8 +145,10 @@ class HomeController extends Controller
             if ($request->video_name) {
                 $careerVideo = $request->file('video_name');
                 $videoName = time() . 'aboutVideo.' . $careerVideo->getClientOriginalExtension();
-                Storage::disk('public')->put($videoName,  File::get($careerVideo));
-                $requestData['video_name'] = $videoName;
+                $path = Storage::disk('s3')->put('images', $request->video_name);
+                $path = Storage::disk('s3')->url($path);
+                // Storage::disk('public')->put($videoName,  File::get($careerVideo));
+                $requestData['video_name'] = $path;
                 // $path = Storage::disk('s3')->put('images', $request->image);
 
                 // $path = Storage::disk('s3')->url($path);
@@ -247,5 +255,12 @@ class HomeController extends Controller
     {
         $resumes = SharedResume::all();
         return view('admin.shared_job', compact('resumes'));
+    }
+
+    public function themeChange(Request $request)
+    {
+        $theme = $request->theme;
+        $request->session()->put('theme', $theme);
+        return 'success';
     }
 }

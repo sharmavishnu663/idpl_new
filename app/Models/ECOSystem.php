@@ -16,6 +16,16 @@ class ECOSystem extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'play_store', 'app_store'
+        'name', 'description', 'play_store', 'app_store', 'logo', 'play_store_value', 'app_store_value', 'category_id', 'theme_id'
     ];
+
+    public function category()
+    {
+        return $this->hasOne('App\Models\ProductCategory', 'id', 'category_id');
+    }
+
+    public function theme()
+    {
+        return $this->hasOne('App\Models\ProductTheme', 'id', 'theme_id');
+    }
 }

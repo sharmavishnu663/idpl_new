@@ -9,7 +9,11 @@ use App\Models\AboutVideo;
 use App\Models\CareerVideo;
 use App\Models\ContactAddress;
 use App\Models\ContactPost;
+use App\Models\Corporate;
+use App\Models\ECOSystem;
 use App\Models\Gallary;
+use App\Models\Job;
+use App\Models\PresentationRequest;
 use App\Models\PrivacyPolicy;
 use App\Models\SharedResume;
 use App\Models\Team;
@@ -260,6 +264,59 @@ class APIController extends Controller
                 $response = ['success' => true, 'message' => 'Resume send successfully'];
             }
             return Response::json($response, 200);
+        } catch (Exception $e) {
+
+            return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
+        }
+    }
+
+    // product list
+    public function productList()
+    {
+        try {
+            $productList = ECOSystem::with('category')->get();
+            $response = ['success' => true, 'message' => 'Product list get successfully', 'data' => $productList];
+            return Response::json($response, 200);
+        } catch (Exception $e) {
+
+            return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
+        }
+    }
+
+    // Corporate list
+    public function corporateList()
+    {
+        try {
+            $corporate = Corporate::first();
+            $response = ['success' => true, 'message' => 'Corporate list get successfully', 'data' => $corporate];
+            return Response::json($response, 200);
+        } catch (Exception $e) {
+
+            return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
+        }
+    }
+
+
+    // Corporate form Data
+    public function presentationData(Request $request)
+    {
+        try {
+            $rules = [
+                'name' => 'required',
+                'mobile' => 'required',
+                'email' => 'required',
+                'office' => 'required',
+            ];
+            $requestData = $request->all();
+            $validator = Validator::make($requestData, $rules);
+            if ($validator->fails()) {
+
+                $response = ['success' => false, 'message' => $validator->errors()->all()];
+            } else {
+                PresentationRequest::create($requestData);
+                $response = ['success' => true, 'message' => 'Presentation request get successfully'];
+                return Response::json($response, 200);
+            }
         } catch (Exception $e) {
 
             return Response::json(['success' => false, 'message' => $e->getMessage()], 404);

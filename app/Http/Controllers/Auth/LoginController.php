@@ -43,7 +43,7 @@ class LoginController extends Controller
     {
         $user = Auth::user();
         if ($user) {
-            return redirect()->back();
+            return redirect()->route('admin.dashboard');
         } else {
             return redirect()->route('admin.showlogin');
         }

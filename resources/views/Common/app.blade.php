@@ -27,12 +27,17 @@
     <link href="{{ asset('assets/vendor/css/quill.snow.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap5.min.css">
-
     <!--Main style-->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" id="switchThemeStyle">
+    @if (Session::get('theme') == 'light')
+        <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" id="switchThemeStyle">
+    @else
+        <link rel="stylesheet" href="{{ asset('assets/css/style.dark.min.css') }}" id="switchThemeStyle">
+    @endif
 </head>
 
 <body>
+    {{-- <input type="hidden" name="_token" value="@csrf"> --}}
+    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
 
     <!--////////////////// PreLoader Start//////////////////////-->
@@ -65,7 +70,7 @@
         <!--Page-->
         <div class="page d-flex flex-row flex-column-fluid">
 
-            @include('Common.sidebar')
+            @include('Common.SideBar')
             <main class="page-content d-flex flex-column flex-row-fluid">
                 <!--//page-header//-->
                 @include('Common.Header')
@@ -130,264 +135,23 @@
             new Quill(qe, qt);
         });
     </script>
+
     <script>
-        $(function() {
-
-            var start = moment().subtract(29, 'days');
-            var end = moment();
-
-            function cb(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-            }
-
-            $('#reportrange').daterangepicker({
-                startDate: start,
-                endDate: end,
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
-                        'month').endOf('month')]
+        function addCss(theme) {
+            var theme = theme;
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: '{!! route('admin.theme.change') !!}', //the page containing php script
+                type: "post", //request type,
+                data: {
+                    theme: theme,
+                    _token: _token
+                },
+                success: function(result) {
+                    return true
                 }
-            }, cb);
-
-            cb(start, end);
-
-        });
-
-        var cPrimary = "#4444ff";
-        var cWarning = "#ff914d";
-        var cSecondary = "#ff5272";
-        var cSuccess = "#07bfa5";
-        var cMuted = "#9d9da7";
-        var cBodycolor = "#626273";
-        var cLight = "#e7e7e9";
-        var cGray = "#ced2e1";
-        var cFont = "$font-family-base";
-
-        //-----------------------Bar Chart------------------
-        new ApexCharts(document.querySelector('#chart-earnings'), {
-            chart: {
-                fontFamily: cFont,
-                type: 'bar',
-                height: 350,
-                toolbar: {
-                    show: false,
-                }
-            },
-            colors: [cPrimary, cWarning],
-            grid: {
-                borderColor: cGray,
-                strokeDashArray: 6,
-                padding: {
-                    top: 0,
-                    right: 20,
-                    bottom: 0,
-                    left: 20
-                },
-                xaxis: {
-                    lines: {
-                        show: true
-                    }
-                },
-                yaxis: {
-                    lines: {
-                        show: false
-                    }
-                },
-            },
-            series: [{
-                    name: 'Earnings',
-                    data: [5717, 6432, 4214, 5214, 5021, 4212, 6247]
-                },
-                {
-                    name: 'Orders',
-                    data: [700, 365, 604, 394, 538, 789, 861]
-                },
-            ],
-            xaxis: {
-                labels: {
-                    style: {
-                        colors: cMuted,
-                        fontFamily: cFont
-                    }
-                },
-                axisTicks: {
-                    show: false,
-                },
-                axisBorder: {
-                    show: false,
-                },
-                tooltip: {
-                    enabled: false
-                },
-                categories: ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun'],
-                crosshairs: {
-                    show: false,
-                    fill: {
-                        type: 'solid',
-                        color: cPrimary
-                    },
-                    stroke: {
-                        color: cLight,
-                        width: 1,
-                        dashArray: 6,
-                    },
-                }
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: cMuted,
-                        fontFamily: cFont
-                    }
-                },
-                crosshairs: {
-                    show: false,
-                }
-            },
-            plotOptions: {
-                bar: {
-                    columnWidth: '40%',
-                    borderRadius: 0,
-                },
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                show: false,
-            },
-            tooltip: {
-                shared: true,
-                intersect: false,
-                labels: {
-                    radius: 0,
-                },
-                y: [{
-                        formatter: function(y) {
-                            if (typeof y !== "undefined") {
-                                return " $" + y.toFixed(0);
-                            }
-                            return y;
-                        }
-                    },
-                    {
-                        formatter: function(y) {
-                            if (typeof y !== "undefined") {
-                                return y.toFixed(0) + " Items";
-                            }
-                            return y;
-                        }
-                    }
-                ]
-            },
-            legend: {
-                position: 'top',
-                fontFamily: cFont,
-                labels: {
-                    colors: cMuted
-                },
-                markers: {
-                    width: 12,
-                    height: 12,
-                    radius: 0
-                }
-            },
-        }).render()
-
-        //-----------------------Radial Bar Chart------------------
-
-        new ApexCharts(document.querySelector('#chart-traffic'), {
-            series: [{
-                    name: ["Organic"],
-                    data: [27, 26, 22, 20, 18, 15, 12]
-                },
-                {
-                    name: ["Direct"],
-                    data: [23, 22, 18, 16, 14, 9, 8]
-                },
-                {
-                    name: ["Referral"],
-                    data: [12, 10, 8, 7, 5, 3, 2]
-                },
-            ],
-            chart: {
-                fontFamily: cFont,
-                height: 300,
-                type: 'line',
-                toolbar: {
-                    show: false
-                },
-                zoom: {
-                    enabled: false
-                }
-            },
-            stroke: {
-                width: 2,
-                curve: 'straight'
-            },
-            colors: [cWarning, cPrimary, cSuccess],
-            grid: {
-                borderColor: cGray,
-                strokeDashArray: 6,
-                padding: {
-                    top: 0,
-                    right: 30,
-                    bottom: 0,
-                    left: 20
-                },
-                xaxis: {
-                    lines: {
-                        show: false
-                    }
-                },
-                yaxis: {
-                    lines: {
-                        show: true
-                    }
-                },
-            },
-            xaxis: {
-                categories: ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun'],
-                crosshairs: {
-                    show: false
-                },
-                labels: {
-                    style: {
-                        colors: cMuted,
-                        offsetX: -65,
-                    },
-                },
-                axisTicks: {
-                    show: false,
-                },
-                axisBorder: {
-                    show: false,
-                },
-                tooltip: {
-                    enabled: true
-                },
-            },
-            yaxis: {
-                labels: {
-                    formatter: function(y) {
-                        return y + "k"
-                    },
-                    style: {
-                        offsetX: 15,
-                        colors: cMuted,
-                    },
-                },
-
-            },
-            legend: {
-                show: false
-            }
-        }).render()
+            });
+        }
     </script>
 
 </body>

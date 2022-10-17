@@ -45,7 +45,7 @@
                                         <table id="datatable" class="table mt-0 table-striped table-card table-nowrap">
                                             <thead class="text-uppercase small text-muted">
                                                 <tr>
-                                                    <th>Decriptions</th>
+                                                    <th>Descriptions</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -100,7 +100,7 @@
                                     <div class="col-12">
                                     </div>
                                     <div class="col-12 col-md-12 mb-5">
-                                        <textarea name="description" cols="100" rows="30" required></textarea>
+                                        <textarea name="description" cols="100" rows="10" required></textarea>
 
                                         <!--Quill editor-->
 
@@ -136,7 +136,7 @@
                                     <div class="col-12">
                                     </div>
                                     <div class="col-12 col-md-12 mb-5">
-                                        <textarea name="description" cols="100" rows="30" id="description_policy" required></textarea>
+                                        <textarea name="description" cols="100" rows="10" id="description_policy" required></textarea>
 
                                         <!--Quill editor-->
 

@@ -87,14 +87,14 @@
                                                             @endif
                                                         </td>
                                                         <td> <a class="js-edit-logo" data-bs-toggle="modal"
-                                                                href="#editModal" style="cursor:pointer" title="edit state"
-                                                                data-id="{{ @$video->id }}"
+                                                                href="#editModal" style="cursor:pointer"
+                                                                title="edit about video" data-id="{{ @$video->id }}"
                                                                 data-video_url="{{ @$video->video_url }}"
                                                                 data-video="{{ $video->video_name ? asset('storage/' . $video->video_name) : '' }}"><i
                                                                     class="fa fa-edit"></i></a>
                                                             <a class="delete-material"
                                                                 href="{{ route('delete.about.video', @$video->id) }}"
-                                                                title="delete logo"
+                                                                title="delete about video"
                                                                 onClick="return  confirm('Are you sure you want to delete ?')"><i
                                                                     class="fa fa-trash-alt"></i></a>
                                                         </td>
