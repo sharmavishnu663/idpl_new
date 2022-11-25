@@ -13,6 +13,7 @@ use App\Models\Corporate;
 use App\Models\ECOSystem;
 use App\Models\Gallary;
 use App\Models\Job;
+use App\Models\JobRequest;
 use App\Models\PresentationRequest;
 use App\Models\PrivacyPolicy;
 use App\Models\SharedResume;
@@ -158,6 +159,32 @@ class APIController extends Controller
         }
     }
 
+    // jobs list
+    public function jobsList()
+    {
+        try {
+            $jobs = Job::where('status', 1)->get();
+            $response = ['success' => true, 'message' => 'Job get successfully', 'data' => $jobs];
+            return Response::json($response, 200);
+        } catch (Exception $e) {
+
+            return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
+        }
+    }
+
+    // job details list
+    public function jobsDetails($id)
+    {
+        try {
+            $jobs = Job::find($id);
+            $response = ['success' => true, 'message' => 'Job get successfully', 'data' => $jobs];
+            return Response::json($response, 200);
+        } catch (Exception $e) {
+
+            return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
+        }
+    }
+
     // form post api
 
     public function postForm(Request $request)
@@ -274,7 +301,7 @@ class APIController extends Controller
     public function productList()
     {
         try {
-            $productList = ECOSystem::with('category')->get();
+            $productList = ECOSystem::with(['category', 'theme'])->get();
             $response = ['success' => true, 'message' => 'Product list get successfully', 'data' => $productList];
             return Response::json($response, 200);
         } catch (Exception $e) {
@@ -314,12 +341,71 @@ class APIController extends Controller
                 $response = ['success' => false, 'message' => $validator->errors()->all()];
             } else {
                 PresentationRequest::create($requestData);
-                $response = ['success' => true, 'message' => 'Presentation request get successfully'];
+                $corporate = Corporate::first();
+                $response = ['success' => true, 'message' => 'Form submitted successfully', 'data' => $corporate];
                 return Response::json($response, 200);
             }
         } catch (Exception $e) {
 
             return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
         }
+    }
+
+
+    //  Apply job form Data
+    public function applyJobs(Request $request)
+    {
+        try {
+            $rules = [
+                'name' => 'required',
+                'mobile' => 'required',
+                'email' => 'required',
+                'location' => 'required',
+                'department' => 'required',
+                'position' => 'required',
+            ];
+            $requestData = $request->all();
+            $validator = Validator::make($requestData, $rules);
+            if ($validator->fails()) {
+
+                $response = ['success' => false, 'message' => $validator->errors()->all()];
+            } else {
+                JobRequest::create($requestData);
+                $response = ['success' => true, 'message' => 'Job Apply successfully'];
+                return Response::json($response, 200);
+            }
+        } catch (Exception $e) {
+
+            return Response::json(['success' => false, 'message' => $e->getMessage()], 404);
+        }
+    }
+
+
+
+    //  search job form Data
+    public function searchJobs(Request $request)
+    {
+        // \DB::enableQueryLog();
+        $jobs = Job::with('status', 1);
+        if (isset($request->location) && $request->location) {
+            $jobs->where('location', 'like', '%' . $request->location . '%');
+        }
+        if (isset($request->position) && $request->position) {
+            $jobs->where('title', 'like', '%' . $request->position . '%');
+        }
+        if (isset($request->department) && $request->department) {
+            $jobs->where('role', 'like', '%' . $request->department . '%');
+        }
+        if (isset($request->search) && $request->search) {
+            $jobs->where('title', 'like', '%' . $request->search . '%');
+            $jobs->Orwhere('department', 'like', '%' . $request->search . '%');
+            $jobs->Orwhere('location', 'like', '%' . $request->search . '%');
+            $jobs->Orwhere('role', 'like', '%' . $request->search . '%');
+            $jobs->Orwhere('description', 'like', '%' . $request->search . '%');
+        }
+        $jobData = $jobs->get();
+        // dd(\DB::getQueryLog());
+        $response = ['success' => true, 'message' => 'search successfully', 'data' => $jobData];
+        return Response::json($response, 200);
     }
 }

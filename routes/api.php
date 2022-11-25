@@ -43,6 +43,12 @@ Route::get('product-list', '\App\Http\Controllers\Api\APIController@productList'
 
 Route::get('jobs-list', '\App\Http\Controllers\Api\APIController@jobsList')->name('jobs.list'); // job list api
 
+Route::get('jobs-detail/{id}', '\App\Http\Controllers\Api\APIController@jobsDetails')->name('jobs.detail'); // job details api
+
 Route::get('corporate-list', '\App\Http\Controllers\Api\APIController@corporateList')->name('corporate.list'); // corporate list api
 
 Route::post('corporate-fom', '\App\Http\Controllers\Api\APIController@presentationData')->name('corporate.form'); // corporate list api
+
+Route::post('job-apply', '\App\Http\Controllers\Api\APIController@applyJobs')->name('job.apply'); // Job Apply api
+
+Route::post('search-apply', '\App\Http\Controllers\Api\APIController@searchJobs')->name('search.apply'); // Search Apply api

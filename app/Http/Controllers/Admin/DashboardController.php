@@ -339,6 +339,6 @@ class DashboardController extends Controller
     public function logout()
     {
         $user = Auth::logout();
-        return redirect()->back();
+        return redirect()->route('admin.showlogin');
     }
 }
